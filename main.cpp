@@ -1,80 +1,55 @@
-// ------------- FILE HEADER -------------
-// Author ✅: 
-// Assignment ✅:
-// Date ✅:
-// Citations: 
-
-
-// ------------- ZYBOOKS SCORES -------------
-// Chapter ✅: 
-// Participation ✅: 
-// Challenge ✅:
-// Labs ✅:
-
-
-// ------------- DISCORD POSTS -------------
-// https://discord.com/invite/URYKKf8YHm
-// Count ✅:
-// Links (Optional): 
-
-
-// ------------- DESIGN DOCUMENT -------------
-// A. INPUT ✅: 
-// B. OUTPUT ✅:
-// C. CALCULATIONS ✅:
-// D. LOGIC and ALGORITHMS ✅:
-//    (Optional) flow chart link or file name: 
-
-
-// ------------- TESTING -------------
-// PASS ALL GIVEN SAMPLE RUN TESTS ✅: 
-// (Optional) Additional tests count:   
-
-
-// ------------- CODE -------------
+/******************************************************************************
+# Author:           Andy Joy
+# Assignment:       Assignment 5
+# Date:             05/14/2026
+# Description:      This program compares two phrases and determines if one
+#                   phrase appears in the other.
+# Input:            phrase1 (string) and phrase2 (string).
+# Output:           phrase1 (string) and phrase2 (string).
+# Sources:          N/A
+#******************************************************************************/
 #include <iostream>
-
+#include <string>
+#include <iomanip>
 using namespace std;
 
-// Function prototypes (if any)
+//Main function
+int main() {
 
+  //Variables declared
+  string phrase1 = " ";
+  string phrase2 = " ";
 
-// Main function
-// https://en.cppreference.com/w/cpp/language/main_function.html
-int main(int argc, char* argv[]) {
-  cout << "Hello, World!" << endl;
+  //Welcome message
+  cout << "Welcome to the Phrases and Subphrases program!" << endl;
+
+  //User input
+  cout << "\nEnter Phrase 1: ";
+  getline (cin, phrase1);
+  cout << "You entered: " << phrase1;
+
+  cout << "\nEnter Phrase 2: ";
+  getline (cin, phrase2);
+  cout << "You entered: " << phrase2 << endl;
+
+  //Comparison of phrases
+  if ((phrase1.find(phrase2) !=  string::npos) && (phrase2.find(phrase1) !=  string::npos)){
+    cout << "\nBoth phrases match." << endl;
+  }
+  else if (phrase1.find(phrase2) !=  string::npos) {
+    cout << "\n" << phrase2 << " is found in " << phrase1 << endl;
+    cout << phrase1.substr(phrase1.find(phrase2)) << endl;
+  }
+  else if (phrase2.find(phrase1) !=  string::npos) {
+    cout << "\n" << phrase1 << " is found in " << phrase2 << endl;
+    cout << phrase2.substr(phrase2.find(phrase1)) << endl;
+  }
+  else {
+    cout << "\nNo match." << endl;
+  }
+
+  //Goodbye message
+  cout << "\nThank you for using my program!" << endl;
+
   return 0;
 }
-
-// Function implementations (if any)
-
-
-// ------------- DESIGN -------------
-/* 
-Program Name:
-
-Program Description:
-
-Design:
-A. INPUT
-Define the input variables including name data type. 
-
-B. OUTPUT
-Define the output variables including data types. 
-
-C. CALCULATIONS
-Describe calculations used by algorithms in step D.  
-List all formulas. 
-If there are no calculations needed, state there are no calculations.
-
-D. LOGIC and ALGORITHMS
-Design the logic of your program using pseudocode or flowcharts. 
-Use conditionals, loops, functions or array constructs.
-List the steps in transforming inputs into outputs. 
-https://github.com/Glen-Sasek-PCC-Instructor/2025-06-22/blob/main/Pseudocode-Reference.txt
-
-
-SAMPLE RUNS
-Copy from assignment document.
-
-*/
