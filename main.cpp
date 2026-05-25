@@ -1,54 +1,95 @@
 /******************************************************************************
 # Author:           Andy Joy
 # Assignment:       Assignment 5
-# Date:             05/14/2026
-# Description:      This program compares two phrases and determines if one
-#                   phrase appears in the other.
-# Input:            phrase1 (string) and phrase2 (string).
-# Output:           phrase1 (string) and phrase2 (string).
+# Date:             05/23/2026
+# Description:      This program takes the number of people, the average number
+#                   of slices per person, and the cost of one pizza as an input,
+#                   and outputs the cost of pizzas, tax, delivery cost, and 
+#                   total cost. Once the user is done entering data, the program
+#                   will output a summary of all the entries.
+# Input:            numPeople (int), avgSlices (double), costPizza (double), 
+#                   choice (char).
+# Output:           numPizzas (int), costPizzas (double), costTax (double), 
+#                   costDelivery (double), totalCost (double), numEntries (int),
+#                   totalPizzas (int), maxPeople (int), maxCost (double).
 # Sources:          N/A
 #******************************************************************************/
 #include <iostream>
-#include <string>
 #include <iomanip>
+#include <cmath>
 using namespace std;
 
-//Main function
-int main() {
+//Constants
+const int NUM_SLICES_PER_PIZZA = 8;
+const double SALES_TAX = 0.07; //7% sales tax
+const double DELIVERY_FEE = 0.20; //20% after tax
 
-  //Variables declared
-  string phrase1 = " ";
-  string phrase2 = " ";
+//Main function
+int main()
+{
+  //Declare variables for input
+  int numPeople = 0;
+  double avgSlices = 0; 
+  double costPizza = 0;
+  char choice;
+
+  //Declare variables for output per entry
+  int numPizzas = 0;
+  double costPizzas = 0;
+  double costTax = 0;
+  double costDelivery = 0;
+  double totalCost = 0;
+
+  //Declare variables for final output
+  int numEntries = 0;
+  int totalPizzas = 0;
+  int maxPeople = 0;
+  double maxCost = 0;
 
   //Welcome message
-  cout << "Welcome to the Phrases and Subphrases program!" << endl;
+  cout << "Welcome to my Pizza Party Statistics program!"<< endl;
 
-  //User input
-  cout << "\nEnter Phrase 1: ";
-  getline (cin, phrase1);
-  cout << "You entered: " << phrase1;
+  do {
+  //Get user input from user first
+  cout << "\nEnter the number of people, average number of slices per person, and the cost of a pizza separated by a space: ";
+  cin >> numPeople >> avgSlices >> costPizza;
 
-  cout << "\nEnter Phrase 2: ";
-  getline (cin, phrase2);
-  cout << "You entered: " << phrase2 << endl;
+  //Calculations
+  numPizzas = ceil((numPeople * avgSlices) / NUM_SLICES_PER_PIZZA);
+  costPizzas = numPizzas * costPizza;
+  costTax = costPizzas * SALES_TAX;
+  costDelivery = (costPizzas + costTax) * DELIVERY_FEE;
+  totalCost = costPizzas + costTax + costDelivery;
 
-  //Comparison of phrases
-  if ((phrase1.find(phrase2) !=  string::npos) && (phrase2.find(phrase1) !=  string::npos)){
-    cout << "\nBoth phrases match." << endl;
+
+  //Print all values here.
+  cout << "\nNumber of pizzas: " << numPizzas << endl;
+  cout << "Cost of pizzas:  $" << fixed << showpoint << setprecision(2) << costPizzas << endl;
+  cout << "Tax:             $" << costTax << endl;
+  cout << "Delivery:        $" << costDelivery << endl;
+  cout << "Total Cost:      $" << totalCost << endl;
+
+  //Update final output variables
+  numEntries ++;
+  totalPizzas += numPizzas;
+  
+  if (numPeople > maxPeople) {
+    maxPeople = numPeople;
   }
-  else if (phrase1.find(phrase2) !=  string::npos) {
-    cout << "\n" << phrase2 << " is found in " << phrase1 << endl;
-    cout << phrase1.substr(phrase1.find(phrase2)) << endl;
-  }
-  else if (phrase2.find(phrase1) !=  string::npos) {
-    cout << "\n" << phrase1 << " is found in " << phrase2 << endl;
-    cout << phrase2.substr(phrase2.find(phrase1)) << endl;
-  }
-  else {
-    cout << "\nNo match." << endl;
+  if (totalCost > maxCost) {
+    maxCost = totalCost;
   }
 
-  //Goodbye message
+  cout << "\nDo you want to enter more (y/n): ";
+  cin >> choice;
+  } while ((choice == 'y' || choice == 'Y') && (choice != 'n' && choice != 'N'));
+  
+  cout << "\nNumber of entries: " << numEntries << endl;
+  cout << "Total number of pizzas: " << totalPizzas << endl;
+  cout << "Average number of pizzas: "<< showpoint << setprecision(1) << static_cast<double>(totalPizzas) / numEntries << endl;
+  cout << "Maximum number of people: "<< maxPeople << endl;
+  cout << "Maximum cost of pizzas: $" << fixed << showpoint << setprecision(2) << maxCost << endl;
+
   cout << "\nThank you for using my program!" << endl;
 
   return 0;
